@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/', fn() => redirect()->route('chat.index'));
-Route::get('/chat', fn() => view('chat.index'))->name('chat.index');
+Route::get('/chat/{contato?}', [ChatController::class, 'index'])->name('chat.index');
+Route::post('/chat/enviar', [ChatController::class, 'enviar'])->name('chat.enviar');
+
+
 
 require __DIR__ . '/auth.php';
